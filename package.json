@@ -1,0 +1,7 @@
+{
+    "scripts": {
+        "start": "node be/server.js",
+        "dev": "cd fe && npx vite --port=3000 && cd ../be && node server.js",
+        "build": "cd fe && npm install && npm run build && cd ../be && npm install"
+    }
+}

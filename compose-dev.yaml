@@ -1,0 +1,23 @@
+services:
+  fe:
+    build:
+      dockerfile: Dockerfile-dev
+      context: fe
+    volumes:
+    - ./fe:/usr/src/app
+    ports:
+      - 3000
+    environment:
+      - PORT=3000
+      - VITE_BE_DEV_PORT=4040
+  be:
+    build:
+      dockerfile: Dockerfile-dev
+      context: be
+    volumes:
+      - ./be:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 4040:4040
+    environment:
+      - PORT=4040

@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type SubscribersSubscribeVendors {
+  amd    Boolean
+  nvidia Boolean
+}
+
+model Driver {
+  id         String   @id @map("_id")
+  insertDate DateTime @db.Date
+  vendor     String
+  version    String
+}
+
+model Subscriber {
+  id               String                      @id @map("_id")
+  lastUpdated      DateTime                    @db.Date
+  registerTime     DateTime                    @db.Date
+  subscribeVendors SubscribersSubscribeVendors
+  userAgent        String
+
+  @@index([subscribeVendors.amd], map: "subscribeVendors.amd_1")
+  @@index([subscribeVendors.nvidia], map: "subscribeVendors.nvidia_1")
+}
